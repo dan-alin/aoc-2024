@@ -1,7 +1,6 @@
-use std::fs;
 
-fn prepare() -> (Vec<i32>, Vec<i32>){
-    let file = fs::read_to_string("src/day_one/input.txt").expect("file not found");
+fn prepare(file:&str) -> (Vec<i32>, Vec<i32>){
+
     let mut left:Vec<i32> = Vec::new();
     let mut right:Vec<i32> = Vec::new();
 
@@ -16,8 +15,10 @@ fn prepare() -> (Vec<i32>, Vec<i32>){
     
 }
 
-pub fn day_one_1() {
-    let (mut left, mut right) = prepare();
+
+
+pub fn part_one(file:&str)-> i32 {
+    let (mut left, mut right) = prepare(file);
 
     let mut count = 0;
     
@@ -28,13 +29,13 @@ pub fn day_one_1() {
         count += (left[i] - right[i]).abs();
     }
 
-    println!("day one part 1: {}", count);
+    count
     
 }
 
 
-pub fn day_one_2() {
-    let ( left,  right) = prepare();
+pub fn part_two(file:&str)-> i32 {
+    let ( left,  right) = prepare(file);
 
     let mut similarity = 0;
     
@@ -50,5 +51,5 @@ pub fn day_one_2() {
         }
     }
 
-    println!("day one part 2: {}", similarity);
+    similarity
 }
