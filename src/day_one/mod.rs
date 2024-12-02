@@ -1,8 +1,6 @@
-
-fn prepare(file:&str) -> (Vec<i32>, Vec<i32>){
-
-    let mut left:Vec<i32> = Vec::new();
-    let mut right:Vec<i32> = Vec::new();
+fn prepare(file: &str) -> (Vec<i32>, Vec<i32>) {
+    let mut left: Vec<i32> = Vec::new();
+    let mut right: Vec<i32> = Vec::new();
 
     for line in file.lines() {
         if let [left_value, right_value] = line.split_whitespace().collect::<Vec<&str>>()[..] {
@@ -12,16 +10,13 @@ fn prepare(file:&str) -> (Vec<i32>, Vec<i32>){
     }
 
     (left, right)
-    
 }
 
-
-
-pub fn part_one(file:&str)-> i32 {
+pub fn part_one(file: &str) -> i32 {
     let (mut left, mut right) = prepare(file);
 
     let mut count = 0;
-    
+
     left.sort();
     right.sort();
 
@@ -30,15 +25,12 @@ pub fn part_one(file:&str)-> i32 {
     }
 
     count
-    
 }
 
-
-pub fn part_two(file:&str)-> i32 {
-    let ( left,  right) = prepare(file);
+pub fn part_two(file: &str) -> i32 {
+    let (left, right) = prepare(file);
 
     let mut similarity = 0;
-    
 
     let mut right_map: std::collections::HashMap<i32, i32> = std::collections::HashMap::new();
     for value in right {
