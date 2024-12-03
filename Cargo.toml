@@ -10,5 +10,5 @@ divan = { version = "0.1.16" }
 
 [[bench]]
 name = "benchmarks"
-path = "benches/benchmarks.rs"
+path = "benchmarks/benchmarks.rs"
 harness = false
