@@ -59,3 +59,12 @@ mod day_03_benches {
         day_03::part_two_split(divan::black_box(include_str!("../assets/input_day_03.txt")));
     }
 }
+
+mod day_04_benches {
+    use super::*;
+
+    #[divan::bench]
+    fn part_one() {
+        day_04::part_one(divan::black_box(include_str!("../assets/input_day_04.txt")));
+    }
+}
