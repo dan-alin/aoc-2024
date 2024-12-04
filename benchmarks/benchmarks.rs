@@ -3,66 +3,59 @@ use aoc_2024::*;
 fn main() {
     divan::main();
 }
+mod day_01_benches {
+    use super::*;
 
-#[divan::bench]
-fn day_01_part_one() {
-    day_one::part_one(divan::black_box(include_str!(
-        "../assets/input_day_one.txt"
-    )));
+    #[divan::bench]
+    fn part_one() {
+        day_01::part_one(divan::black_box(include_str!("../assets/input_day_01.txt")));
+    }
+
+    #[divan::bench]
+    fn part_one_zip() {
+        day_01::part_one_zip(divan::black_box(include_str!("../assets/input_day_01.txt")));
+    }
+
+    #[divan::bench]
+    fn part_two() {
+        day_01::part_two(divan::black_box(include_str!("../assets/input_day_01.txt")));
+    }
+
+    #[divan::bench]
+    fn part_two_filter() {
+        day_01::part_two_filter(divan::black_box(include_str!("../assets/input_day_01.txt")));
+    }
 }
 
-#[divan::bench]
-fn day_01_part_one_zip() {
-    day_one::part_one_zip(divan::black_box(include_str!(
-        "../assets/input_day_one.txt"
-    )));
+mod day_02_benches {
+    use super::*;
+
+    #[divan::bench]
+    fn part_one() {
+        day_02::part_one(divan::black_box(include_str!("../assets/input_day_02.txt")));
+    }
+
+    #[divan::bench]
+    fn part_two() {
+        day_02::part_two(divan::black_box(include_str!("../assets/input_day_02.txt")));
+    }
 }
 
-#[divan::bench]
-fn day_01_part_two() {
-    day_one::part_two(divan::black_box(include_str!(
-        "../assets/input_day_one.txt"
-    )));
-}
+mod day_03_benches {
+    use super::*;
 
-#[divan::bench]
-fn day_01_part_two_filter() {
-    day_one::part_two_filter(divan::black_box(include_str!(
-        "../assets/input_day_one.txt"
-    )));
-}
+    #[divan::bench]
+    fn part_one() {
+        day_03::part_one(divan::black_box(include_str!("../assets/input_day_03.txt")));
+    }
 
-#[divan::bench]
-fn day_02_part_one() {
-    day_two::part_one(divan::black_box(include_str!(
-        "../assets/input_day_two.txt"
-    )));
-}
+    #[divan::bench]
+    fn part_two() {
+        day_03::part_two(divan::black_box(include_str!("../assets/input_day_03.txt")));
+    }
 
-#[divan::bench]
-fn day_02_part_two() {
-    day_two::part_two(divan::black_box(include_str!(
-        "../assets/input_day_two.txt"
-    )));
-}
-
-#[divan::bench]
-fn day_03_part_one() {
-    day_three::part_one(divan::black_box(include_str!(
-        "../assets/input_day_three.txt"
-    )));
-}
-
-#[divan::bench]
-fn day_03_part_two() {
-    day_three::part_two(divan::black_box(include_str!(
-        "../assets/input_day_three.txt"
-    )));
-}
-
-#[divan::bench]
-fn day_03_part_two_split() {
-    day_three::part_two_split(divan::black_box(include_str!(
-        "../assets/input_day_three.txt"
-    )));
+    #[divan::bench]
+    fn part_two_split() {
+        day_03::part_two_split(divan::black_box(include_str!("../assets/input_day_03.txt")));
+    }
 }

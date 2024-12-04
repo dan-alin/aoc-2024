@@ -1,11 +1,14 @@
-benchmarks                 fastest       │ slowest       │ median        │ mean          │ samples │ iters
-├─ day_01_part_one         50.04 µs      │ 107.9 µs      │ 50.45 µs      │ 51.81 µs      │ 100     │ 100
-├─ day_01_part_one_zip     47.95 µs      │ 51.12 µs      │ 49.91 µs      │ 49.62 µs      │ 100     │ 100
-├─ day_01_part_two         66.08 µs      │ 117 µs        │ 70.04 µs      │ 70.55 µs      │ 100     │ 100
-├─ day_01_part_two_filter  75.99 µs      │ 114 µs        │ 78.58 µs      │ 79.49 µs      │ 100     │ 100
-├─ day_02_part_one         129.9 µs      │ 179.1 µs      │ 134.9 µs      │ 135.2 µs      │ 100     │ 100
-├─ day_02_part_two         162.9 µs      │ 188.2 µs      │ 173.1 µs      │ 172.2 µs      │ 100     │ 100
-├─ day_03_part_one         254.6 µs      │ 720.4 µs      │ 262.4 µs      │ 266.9 µs      │ 100     │ 100
-├─ day_03_part_two         317.1 µs      │ 455 µs        │ 324.3 µs      │ 329.4 µs      │ 100     │ 100
-╰─ day_03_part_two_split   214.9 µs      │ 277.9 µs      │ 221.4 µs      │ 222.7 µs      │ 100     │ 100
+benchmarks             fastest       │ slowest       │ median        │ mean          │ samples │ iters
+├─ day_01_benches                    │               │               │               │         │
+│  ├─ part_one         49.58 µs      │ 112.1 µs      │ 50.1 µs       │ 51.55 µs      │ 100     │ 100
+│  ├─ part_one_zip     49.58 µs      │ 62.29 µs      │ 50.41 µs      │ 51.21 µs      │ 100     │ 100
+│  ├─ part_two         65.58 µs      │ 107.2 µs      │ 69.91 µs      │ 70.74 µs      │ 100     │ 100
+│  ╰─ part_two_filter  78.58 µs      │ 86.66 µs      │ 79.87 µs      │ 79.99 µs      │ 100     │ 100
+├─ day_02_benches                    │               │               │               │         │
+│  ├─ part_one         133.9 µs      │ 160.4 µs      │ 136.4 µs      │ 136.9 µs      │ 100     │ 100
+│  ╰─ part_two         169.4 µs      │ 190.7 µs      │ 174.5 µs      │ 175 µs        │ 100     │ 100
+╰─ day_03_benches                    │               │               │               │         │
+   ├─ part_one         244.5 µs      │ 848.3 µs      │ 249.7 µs      │ 256.5 µs      │ 100     │ 100
+   ├─ part_two         315.1 µs      │ 451.7 µs      │ 320.6 µs      │ 323.4 µs      │ 100     │ 100
+   ╰─ part_two_split   211 µs        │ 457.1 µs      │ 218.9 µs      │ 229.7 µs      │ 100     │ 100
 
