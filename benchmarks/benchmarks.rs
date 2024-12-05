@@ -67,4 +67,9 @@ mod day_04_benches {
     fn part_one() {
         day_04::part_one(divan::black_box(include_str!("../assets/input_day_04.txt")));
     }
+
+    #[divan::bench]
+    fn part_two() {
+        day_04::part_two(divan::black_box(include_str!("../assets/input_day_04.txt")));
+    }
 }

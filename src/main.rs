@@ -28,4 +28,5 @@ fn main() {
     );
 
     println!("day 4 - part 1: {}", day_04::part_one(&d4_input));
+    println!("day 4 - part 2: {}", day_04::part_two(&d4_input));
 }

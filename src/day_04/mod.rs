@@ -67,10 +67,10 @@ pub fn part_one(file: &str) -> i32 {
         (0, -1),  // Left
         (1, 0),   // Down
         (-1, 0),  // Up
-        (1, 1),   // Bottom-right diagonal
-        (1, -1),  // Bottom-left diagonal
-        (-1, 1),  // Top-right diagonal
-        (-1, -1), // Top-left diagonal
+        (1, 1),   // Bottom-right
+        (1, -1),  // Bottom-left
+        (-1, 1),  // Top-right
+        (-1, -1), // Top-left
     ];
 
     let mut visited = vec![vec![false; cols]; rows];
@@ -97,10 +97,56 @@ pub fn part_one(file: &str) -> i32 {
     count
 }
 
-// pub fn part_two(file: &str) -> i32 {
-//     let reports = prepare(file);
+pub fn part_two(file: &str) -> i32 {
+    let matrix = prepare(file);
 
-//     let mut count = 0;
+    let rows = matrix.len();
+    let cols = matrix[0].len();
 
-//     count
-// }
+    let mut count = 0;
+
+    let directions: Vec<(i32, i32)> = vec![
+        (-1, 1),  // Top-right
+        (1, 1),   // Bottom-right
+        (1, -1),  // Bottom-left
+        (-1, -1), // Top-left
+    ];
+
+    for row in 0..rows {
+        for col in 0..cols {
+            if matrix[row][col] == 'A' {
+                let mut angles = vec![];
+                for &(dc, dr) in &directions {
+                    if row as i32 + dr >= 0
+                        && row as i32 + dr < rows as i32
+                        && col as i32 + dc >= 0
+                        && col as i32 + dc < cols as i32
+                    {
+                        angles.push(matrix[(row as i32 + dr) as usize][(col as i32 + dc) as usize])
+                    }
+                }
+
+                if angles.len() == 4 {
+                    let m_count = angles.iter().filter(|&&ch| ch == 'M').count();
+                    let s_count = angles.iter().filter(|&&ch| ch == 'S').count();
+
+                    if m_count == 2 && s_count == 2 {
+                        // check if the diagonals are MAS or SAM
+                        let top_left_to_bottom_right = format!("{}{}{}", angles[0], 'A', angles[2]);
+                        let top_right_to_bottom_left = format!("{}{}{}", angles[1], 'A', angles[3]);
+
+                        if top_left_to_bottom_right == "MAS"
+                            || top_left_to_bottom_right == "SAM"
+                            || top_right_to_bottom_left == "MAS"
+                            || top_right_to_bottom_left == "SAM"
+                        {
+                            count += 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    count
+}
