@@ -41,7 +41,7 @@ pub fn part_one_zip(file: &str) -> i32 {
 pub fn part_two(file: &str) -> i32 {
     let (left, right) = prepare(file);
 
-    let mut similarity = 0;
+    let mut similarity: i32 = 0;
 
     let mut right_map: std::collections::HashMap<i32, i32> = std::collections::HashMap::new();
     for value in right {

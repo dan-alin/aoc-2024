@@ -2,12 +2,14 @@ mod day_01;
 mod day_02;
 mod day_03;
 mod day_04;
+mod day_05;
 
 fn main() {
     let d1_input = include_str!("../assets/input_day_01.txt");
     let d2_input = include_str!("../assets/input_day_02.txt");
     let d3_input = include_str!("../assets/input_day_03.txt");
     let d4_input = include_str!("../assets/input_day_04.txt");
+    let d5_input = include_str!("../assets/input_day_05.txt");
 
     println!("day 1 - part 1: {}", day_01::part_one(&d1_input));
     println!("day 1 - part 1 zip: {}", day_01::part_one_zip(&d1_input));
@@ -29,4 +31,7 @@ fn main() {
 
     println!("day 4 - part 1: {}", day_04::part_one(&d4_input));
     println!("day 4 - part 2: {}", day_04::part_two(&d4_input));
+
+    println!("day 5 - part 1: {}", day_05::part_one(&d5_input));
+    println!("day 5 - part 2: {}", day_05::part_two(&d5_input));
 }

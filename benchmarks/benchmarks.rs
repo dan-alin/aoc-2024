@@ -73,3 +73,17 @@ mod day_04_benches {
         day_04::part_two(divan::black_box(include_str!("../assets/input_day_04.txt")));
     }
 }
+
+mod day_05_benches {
+    use super::*;
+
+    #[divan::bench]
+    fn part_one() {
+        day_05::part_one(divan::black_box(include_str!("../assets/input_day_05.txt")));
+    }
+
+    #[divan::bench]
+    fn part_two() {
+        day_05::part_two(divan::black_box(include_str!("../assets/input_day_05.txt")));
+    }
+}
