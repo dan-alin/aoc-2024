@@ -110,8 +110,18 @@ mod day_07_benches {
         day_07::part_one(divan::black_box(include_str!("../assets/input_day_07.txt")));
     }
 
-    // #[divan::bench]
-    // fn part_two() {
-    //     day_06::part_two(divan::black_box(include_str!("../assets/input_day_06.txt")));
-    // }
+    #[divan::bench]
+    fn part_one_rtl() {
+        day_07::part_one_rtl(divan::black_box(include_str!("../assets/input_day_07.txt")));
+    }
+
+    #[divan::bench(sample_count = 10)]
+    fn part_two() {
+        day_07::part_two(divan::black_box(include_str!("../assets/input_day_07.txt")));
+    }
+
+    #[divan::bench(sample_count = 10)]
+    fn part_two_rtl() {
+        day_07::part_two_rtl(divan::black_box(include_str!("../assets/input_day_07.txt")));
+    }
 }

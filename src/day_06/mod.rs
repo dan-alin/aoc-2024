@@ -8,7 +8,7 @@ pub fn part_one(file: &str) -> i32 {
 
     let dir = (-1, 0);
 
-    let mut guard_pos: (i32, i32) = (-1, -1);
+    let mut guard_pos: (i32, i32);
 
     for row in 0..matrix.len() {
         for col in 0..matrix[0].len() {
@@ -77,6 +77,6 @@ fn move_into_direction(
     exit_found
 }
 
-pub fn part_two(file: &str) -> i32 {
+pub fn part_two(_file: &str) -> i32 {
     0
 }
