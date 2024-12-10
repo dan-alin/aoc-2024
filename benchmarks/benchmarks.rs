@@ -115,6 +115,11 @@ mod day_07_benches {
         day_07::part_one_rtl(divan::black_box(include_str!("../assets/input_day_07.txt")));
     }
 
+    #[divan::bench]
+    fn part_one_filter() {
+        day_07::part_one_filter(divan::black_box(include_str!("../assets/input_day_07.txt")));
+    }
+
     #[divan::bench(sample_count = 10)]
     fn part_two() {
         day_07::part_two(divan::black_box(include_str!("../assets/input_day_07.txt")));
@@ -124,4 +129,23 @@ mod day_07_benches {
     fn part_two_rtl() {
         day_07::part_two_rtl(divan::black_box(include_str!("../assets/input_day_07.txt")));
     }
+
+    #[divan::bench]
+    fn part_two_filter() {
+        day_07::part_two_filter(divan::black_box(include_str!("../assets/input_day_07.txt")));
+    }
 }
+
+// mod day_10_benches {
+//     use super::*;
+
+//     #[divan::bench]
+//     fn part_one() {
+//         day_10::part_one(divan::black_box(include_str!("../assets/input_day_10.txt")));
+//     }
+
+//     // #[divan::bench]
+//     // fn part_one_rtl() {
+//     //     day_10::part_one_rtl(divan::black_box(include_str!("../assets/input_day_10.txt")));
+//     // }
+// }

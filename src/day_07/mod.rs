@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use std::collections::HashMap;
 
 fn prepare(file: &str) -> HashMap<i64, Vec<i64>> {
@@ -18,24 +19,19 @@ fn prepare(file: &str) -> HashMap<i64, Vec<i64>> {
     hash_map
 }
 
-fn generate_combinations(len: usize, operators: &Vec<char>) -> Vec<Vec<char>> {
+#[allow(dead_code)]
+fn combinations_product(len: usize, operators: &Vec<char>) -> Vec<Vec<&char>> {
     let mut combinations = Vec::new();
-
-    let total_combinations = operators.len().pow(len as u32);
-
-    for i in 0..total_combinations {
-        let mut combination = Vec::with_capacity(len);
-        let mut num = i;
-        for _ in 0..len {
-            combination.push(operators[num % operators.len()]);
-            num /= operators.len();
-        }
-        combinations.push(combination);
-    }
-
+    (0..len)
+        .map(|_| operators)
+        .multi_cartesian_product()
+        .for_each(|x| {
+            combinations.push(x);
+        });
     combinations
 }
 
+#[allow(dead_code)]
 fn evaluate_left_to_right(tokens: Vec<&str>) -> i64 {
     let mut result = tokens[0].parse::<i64>().expect("Invalid number");
 
@@ -99,12 +95,13 @@ fn evaluate_right_to_left_with_target(tokens: &[&str], target: i64) -> bool {
     }
 }
 
+#[allow(dead_code)]
 pub fn part_one(file: &str) -> i64 {
     let mut count = 0;
     let map = prepare(file);
     let operators = vec!['+', '*'];
 
-    let mut combinations_map: HashMap<i64, Vec<Vec<char>>> = HashMap::new();
+    let mut combinations_map: HashMap<i64, Vec<Vec<&char>>> = HashMap::new();
 
     for (key, value) in map.iter() {
         let combination_size = value.len() as i64;
@@ -114,7 +111,7 @@ pub fn part_one(file: &str) -> i64 {
         if val.is_none() {
             combinations_map.insert(
                 combination_size,
-                generate_combinations((combination_size - 1) as usize, &operators),
+                combinations_product((combination_size - 1) as usize, &operators),
             );
         }
 
@@ -143,13 +140,42 @@ pub fn part_one(file: &str) -> i64 {
     count
 }
 
+pub fn part_one_filter(file: &str) -> i64 {
+    let map = prepare(file);
+    let operators = ['+', '*'];
+
+    let count = map
+        .iter()
+        .filter_map(|(key, values)| {
+            (0..values.len() - 1)
+                .map(|_| operators)
+                .multi_cartesian_product()
+                .any(|sequence| {
+                    let mut iterator = sequence.iter();
+                    *key == values
+                        .iter()
+                        .copied()
+                        .reduce(|acc, value| match iterator.next().unwrap() {
+                            '+' => acc + value,
+                            '*' => acc * value,
+                            _ => panic!("Unsupported operator"),
+                        })
+                        .unwrap()
+                })
+                .then_some(key)
+        })
+        .sum();
+
+    count
+}
+
 #[allow(dead_code)]
 pub fn part_one_rtl(file: &str) -> i64 {
     let mut count = 0;
     let map = prepare(file);
     let operators = vec!['+', '*'];
 
-    let mut combinations_map: HashMap<i64, Vec<Vec<char>>> = HashMap::new();
+    let mut combinations_map: HashMap<i64, Vec<Vec<&char>>> = HashMap::new();
 
     for (key, value) in map.iter() {
         let combination_size = value.len() as i64;
@@ -159,7 +185,7 @@ pub fn part_one_rtl(file: &str) -> i64 {
         if val.is_none() {
             combinations_map.insert(
                 combination_size,
-                generate_combinations((combination_size - 1) as usize, &operators),
+                combinations_product((combination_size - 1) as usize, &operators),
             );
         }
 
@@ -188,12 +214,13 @@ pub fn part_one_rtl(file: &str) -> i64 {
     count
 }
 
+#[allow(dead_code)]
 pub fn part_two(file: &str) -> i64 {
     let mut count = 0;
     let map = prepare(file);
     let operators = vec!['+', '*', '|'];
 
-    let mut combinations_map: HashMap<i64, Vec<Vec<char>>> = HashMap::new();
+    let mut combinations_map: HashMap<i64, Vec<Vec<&char>>> = HashMap::new();
 
     for (key, value) in map.iter() {
         let combination_size = value.len() as i64;
@@ -203,7 +230,7 @@ pub fn part_two(file: &str) -> i64 {
         if val.is_none() {
             combinations_map.insert(
                 combination_size,
-                generate_combinations((combination_size - 1) as usize, &operators),
+                combinations_product((combination_size - 1) as usize, &operators),
             );
         }
 
@@ -238,7 +265,7 @@ pub fn part_two_rtl(file: &str) -> i64 {
     let map = prepare(file);
     let operators = vec!['+', '*', '|'];
 
-    let mut combinations_map: HashMap<i64, Vec<Vec<char>>> = HashMap::new();
+    let mut combinations_map: HashMap<i64, Vec<Vec<&char>>> = HashMap::new();
 
     for (key, value) in map.iter() {
         let combination_size = value.len() as i64;
@@ -248,7 +275,7 @@ pub fn part_two_rtl(file: &str) -> i64 {
         if val.is_none() {
             combinations_map.insert(
                 combination_size,
-                generate_combinations((combination_size - 1) as usize, &operators),
+                combinations_product((combination_size - 1) as usize, &operators),
             );
         }
 
@@ -273,6 +300,38 @@ pub fn part_two_rtl(file: &str) -> i64 {
             }
         }
     }
+
+    count
+}
+
+pub fn part_two_filter(file: &str) -> i64 {
+    let map = prepare(file);
+    let operators = ['+', '*', '|'];
+
+    let count = map
+        .iter()
+        .filter_map(|(key, values)| {
+            (0..values.len() - 1)
+                .map(|_| operators)
+                .multi_cartesian_product()
+                .any(|sequence| {
+                    let mut iterator = sequence.iter();
+                    *key == values
+                        .iter()
+                        .copied()
+                        .reduce(|acc, value| match iterator.next().unwrap() {
+                            '+' => acc + value,
+                            '*' => acc * value,
+                            '|' => (acc.to_string() + &value.to_string())
+                                .parse::<i64>()
+                                .unwrap(),
+                            _ => panic!("Unsupported operator"),
+                        })
+                        .unwrap()
+                })
+                .then_some(key)
+        })
+        .sum();
 
     count
 }
